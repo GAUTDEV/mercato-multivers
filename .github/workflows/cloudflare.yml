@@ -30,6 +30,16 @@ jobs:
               exit 1
             fi
           done
+      - name: Normalize deployment token
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          import {appendFileSync} from 'node:fs';
+          const token = (process.env.CLOUDFLARE_API_TOKEN || '').trim();
+          if (!token || /\s/.test(token)) throw new Error('CLOUDFLARE_API_TOKEN must contain only the Cloudflare API token, without commands, spaces, or other lines. Update this existing GitHub secret; no token was printed.');
+          console.log('::add-mask::' + token);
+          appendFileSync(process.env.GITHUB_ENV, 'CLOUDFLARE_API_TOKEN=' + token + '\n');
+          NODE
       - uses: pnpm/action-setup@v4
       - run: pnpm install --frozen-lockfile
       - name: Resolve existing game database
