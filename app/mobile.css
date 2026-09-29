@@ -1,0 +1,357 @@
+/* Responsive play surfaces. Desktop layout stays in globals.css. */
+.mobile-card-details, .custom-bid-toggle, .mobile-bid-label { display: none; }
+.formation-status { display: flex; align-items: center; gap: 10px; margin: 20px 0; color: #b8becd; font-size: 14px; line-height: 1.5; }
+.formation-status.is-selecting { color: #ffd0c5; }
+.formation-status .text-button { margin-left: auto; white-space: nowrap; }
+.formation-status p { flex: 1; min-width: 0; overflow-wrap: anywhere; }
+.formation-slot { position: relative; }
+.placement-state { display: none; }
+.bid-clock strong, .bid-amount { font-variant-numeric: tabular-nums; }
+.custom-bid input { scroll-margin-bottom: 24px; }
+.recruiter-row > div, .lobby-player > div, .standing-row > strong,
+.battle-matchbar > span, .health-label > span, .match-recap > span { min-width: 0; }
+.lobby-player strong, .standing-row > strong, .match-recap > span,
+.battle-matchbar strong, .award > strong { overflow-wrap: anywhere; }
+
+@media (max-width: 760px) {
+  html { scroll-padding-block: 16px 24px; }
+  body { -webkit-text-size-adjust: 100%; }
+  .app { min-height: 100svh; overflow: clip; }
+  button, a, [role="button"] { touch-action: manipulation; }
+  input, select, textarea, .field input, .custom-bid input, .search-input > input {
+    font-size: 16px;
+  }
+  .icon-button, .primary, .secondary, .text-button, .speed-button,
+  .duel-timeline button, .opponent-mini, .universe-picks button {
+    min-height: 44px;
+  }
+  .icon-button { width: 44px; height: 44px; }
+  .home-shell, .game-shell { padding-inline: max(16px, env(safe-area-inset-left)) max(16px, env(safe-area-inset-right)); }
+
+  /* Brand and tools above navigation: every control has its own hit area. */
+  .topbar {
+    height: auto; min-height: 110px; display: grid;
+    grid-template-columns: minmax(0, 1fr) auto; gap: 0 8px;
+    padding: max(8px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) 0 max(16px, env(safe-area-inset-left));
+  }
+  .brand { grid-column: 1; grid-row: 1; justify-self: start; min-height: 48px; font-size: 17px; gap: 8px; }
+  .brand-mark { width: 30px; height: 33px; font-size: 23px; }
+  .brand-sub { font-size: 8px; letter-spacing: 4px; }
+  .header-tools { grid-column: 2; grid-row: 1; gap: 0; margin: 0; }
+  .header-tools .icon-button, .header-tools .help-button { display: inline-flex; }
+  .topbar nav { grid-column: 1; grid-row: 2; margin: 0; gap: 20px; height: 46px; font-size: 13px; }
+  .topbar nav button { min-height: 44px; }
+  .header-room { grid-column: 2; grid-row: 2; display: flex; justify-content: flex-end; margin: 0; min-height: 44px; font-size: 14px; gap: 7px; }
+  .header-room > span { display: none; }
+  .edition { display: none; }
+  .connection-banner { align-items: center; font-size: 12px; line-height: 1.5; }
+
+  .season-label { height: 50px; font-size: 9px; }
+  .hero { grid-template-columns: 1fr; min-height: auto; }
+  .hero-copy { padding-top: 8px; }
+  .hero-copy h1 { font-size: clamp(42px, 11.5vw, 70px); letter-spacing: -.055em; line-height: 1.04; }
+  .hero-description { font-size: 15px; line-height: 1.6; margin-top: 19px; }
+  .hero-actions { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 10px; margin-top: 24px; }
+  .hero-actions .primary, .hero-actions .secondary { padding: 14px 10px; font-size: 14px; min-height: 50px; }
+  .solo-link { width: 100%; min-height: 48px; justify-content: center; padding: 12px 6px; margin-top: 10px; border: 1px solid #343742; border-radius: 8px; font-size: 13px; }
+  .hero-metrics { justify-content: space-between; gap: 12px; margin-top: 24px; }
+  .hero-metrics span { font-size: 9px; letter-spacing: .8px; }
+  .hero-art { min-height: 355px; margin: 20px 0 0; padding-bottom: 20px; }
+  .hero-card-fan { height: 320px; max-width: 460px; }
+  .hero-card-fan > div { width: 42%; top: 23px; }
+  .hero-card-fan .card-hero { height: 250px; }
+  .hero-card-0 { left: 2%; }
+  .hero-card-1 { left: 29%; }
+  .hero-card-2 { right: 0; }
+  .hero-art .float-badge { bottom: 42px; right: 0; padding: 10px 12px; }
+  .hero-watermark { font-size: 80px; right: 0; }
+  .art-caption { bottom: 5px; font-size: 8px; letter-spacing: 2px; }
+  .flow-strip { margin-top: 12px; }
+
+  /* Dialogs fit the visual viewport; fields don't trigger iOS input zoom. */
+  [data-slot="dialog-content"], [data-slot="alert-dialog-content"] {
+    width: calc(100% - 24px) !important; max-width: 620px !important;
+    max-height: calc(100dvh - max(24px, env(safe-area-inset-top)) - env(safe-area-inset-bottom)) !important;
+    overflow: auto; overscroll-behavior: contain; scroll-padding-block: 20px;
+    padding: 24px 20px max(24px, env(safe-area-inset-bottom)) !important;
+    border-radius: 16px !important;
+  }
+  [data-slot="dialog-close"] { top: 8px; right: 8px; width: 44px; height: 44px; display: grid; place-items: center; border-radius: 9px; background: #242732; opacity: 1; z-index: 2; }
+  [data-slot="dialog-header"] { text-align: left; padding-right: 26px; }
+  .modal-title { font-size: 28px !important; line-height: 1.12 !important; }
+  .setup-dialog { gap: 22px !important; }
+  .setup-dialog .dialog-icon { display: none; }
+  .setup-dialog [data-slot="dialog-description"] { font-size: 13px; }
+  .fields-grid { gap: 16px 12px; }
+  .field { font-size: 13px; }
+  .field > span { line-height: 1.5; }
+  .field input { min-height: 48px; }
+  .choice-trigger { min-height: 48px !important; font-size: 14px !important; }
+  [data-slot="select-content"] { max-width: calc(100vw - 24px); }
+  [data-slot="select-item"] { min-height: 44px; font-size: 14px; }
+  .universe-picks { gap: 8px; }
+  .universe-picks button { padding: 10px; font-size: 12px; }
+  .advanced-toggle { min-height: 48px; }
+  .switch-row { min-height: 48px; font-size: 13px; }
+  .code-input { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); width: 100%; gap: 6px; }
+  [data-slot="input-otp-group"].code-input > div { width: 100%; height: 50px; min-width: 0; font-size: 21px; }
+  [data-slot="input-otp"] { font-size: 16px !important; }
+  .card-detail { grid-template-columns: minmax(110px, .75fr) minmax(0, 1fr); gap: 18px; }
+  .card-detail .card-auction { width: 100%; min-height: 0; height: auto; aspect-ratio: 2/3; }
+  .card-detail .card-copy h3 { font-size: 21px; }
+  .card-detail .card-copy { left: 10px; bottom: 12px; }
+  .card-detail .card-universe { font-size: 9px; }
+  .card-detail .role-detail p { font-size: 12px; }
+  .card-detail .stat-row { font-size: 12px; gap: 6px; }
+  .card-detail .stat-row > span:first-child { width: auto; }
+  .card-detail .stat-row .unknown, .card-detail .stat-row .word-stat { font-size: 11px; }
+  .card-detail .stat-row .unknown svg { display: none; }
+  .rules-steps p { font-size: 14px; }
+  .counter-guide > div > div { display: grid; grid-template-columns: 18px 1fr 1fr; gap: 8px; font-size: 12px; }
+  .counter-guide .beats { grid-column: 2; font-size: 11px; }
+  .counter-guide > div > div > strong { grid-column: 3; grid-row: auto; }
+
+  .game-progress { padding: 15px 0; margin-bottom: 20px; gap: 5px; justify-content: space-between; }
+  .game-progress > span { font-size: 11px; }
+  .game-progress > span > b { display: none; }
+  .game-progress > .session-mode { display: none; }
+  .game-progress > span.current { font-weight: 700; }
+  .game-footer { line-height: 1.6; padding-bottom: max(24px, env(safe-area-inset-bottom)); }
+  .game-footer > button { min-height: 44px; }
+
+  /* Keep bidding within thumb reach; the measured spacer protects the roster. */
+  .market-layout { display: flex; flex-direction: column; gap: 18px; animation: none; padding-bottom: calc(var(--bid-panel-height, 224px) + 20px); }
+  .auction-stage { display: contents; }
+  .recruiters-panel { order: 0; display: flex; gap: 10px; padding: 0 0 12px; width: 100%; max-width: 100%; overflow-x: auto; overscroll-behavior-x: contain; scrollbar-width: thin; }
+  .recruiter-row { flex: 0 0 140px; min-width: 0; gap: 8px; padding: 10px 12px; border: 1px solid #303542; border-radius: 9px; background: #1a1e28; }
+  .recruiter-row .avatar { display: none; }
+  .recruiter-row.is-me { border-color: #745049; }
+  .recruiter-row.is-leading { background: #312720; border-color: #ac7350; }
+  .recruiter-row.is-leading:after { display: none; }
+  .recruiter-row strong { display: block; max-width: 80px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 12px; }
+  .recruiter-row > div > span { font-size: 10px; }
+  .recruiter-row > b { margin-left: auto; font-size: 16px; white-space: nowrap; }
+  .stage-heading { order: 1; margin: 0; gap: 10px; align-items: center; }
+  .stage-heading > div { min-width: 0; }
+  .auction-stage .stage-heading h1 { font-size: clamp(24px, 6.6vw, 34px); letter-spacing: -1px; }
+  .auction-stage .stage-heading .eyebrow { font-size: 9px; letter-spacing: 1px; margin-bottom: 8px; }
+  .lot-count { display: flex; flex-shrink: 0; gap: 4px; font-size: 10px; }
+  .auction-character { order: 2; display: grid; grid-template-columns: minmax(0, .95fr) minmax(0, 1fr); gap: 12px 16px; align-items: start; }
+  .auction-card-wrap { width: 100%; max-width: 230px; margin: 0; }
+  .auction-card-wrap .card-auction { width: 100%; height: auto; min-height: 0; aspect-ratio: 2/3; }
+  .auction-card-wrap .card-copy { left: 12px; right: 10px; bottom: 15px; }
+  .auction-card-wrap .card-copy h3 { font-size: clamp(20px, 5.3vw, 30px); }
+  .auction-card-wrap .card-role { font-size: 11px; }
+  .auction-card-wrap .card-universe { font-size: 9px; letter-spacing: .5px; }
+  .auction-intel { display: block; padding: 0; min-width: 0; }
+  .auction-intel > .eyebrow { display: none; }
+  .auction-intel > h2 { font-size: 14px; line-height: 1.4; margin-bottom: 12px; }
+  .auction-intel .stat-block { gap: 8px; }
+  .auction-intel .stat-row { font-size: 11px; gap: 4px; }
+  .auction-intel .stat-row > span:first-child { width: auto; }
+  .auction-intel .unknown, .auction-intel .word-stat { font-size: 11px; }
+  .auction-intel .unknown svg { display: none; }
+  .auction-intel .hidden-note, .auction-intel .passive { display: none; }
+  .mobile-card-details { display: flex; grid-column: 1/-1; align-items: center; justify-content: center; gap: 8px; min-height: 44px; border: 1px solid #393d49; border-radius: 8px; font-size: 12px; color: #d0c4b1; background: #1c1f28; }
+  .event-banner { order: 3; flex-wrap: wrap; gap: 7px; padding: 12px; margin: 0; }
+  .event-banner > span { flex-basis: 100%; font-size: 12px; }
+  .event-banner > strong { font-size: 12px; }
+  .your-roster { order: 4; min-width: 0; width: 100%; margin: 0; padding-top: 12px; }
+  .your-roster .panel-heading h2 { font-size: 15px; }
+  .your-roster .roster-budget { font-size: 12px !important; }
+  .roster-strip { overflow-x: auto; padding: 5px 5px 14px; gap: 12px; scroll-snap-type: x proximity; scrollbar-width: thin; }
+  .roster-strip > * { width: 110px; min-width: 110px; height: 165px; scroll-snap-align: start; }
+  .roster-strip .card-mini h3 { font-size: 16px; }
+  .reveal-stage { order: 2; width: 100%; height: 270px; }
+  .bidding-panel {
+    position: fixed; inset: auto 0 0; z-index: 30; width: 100%; margin: 0;
+    display: grid; grid-template-columns: minmax(0, 1fr) 118px; gap: 0;
+    border: 1px solid #4c4650; border-bottom: 0; border-radius: 18px 18px 0 0;
+    background: #1a1e28; box-shadow: 0 -8px 35px #090a12aa; overflow: auto;
+    max-height: 65dvh; padding: 0 max(12px, env(safe-area-inset-right)) env(safe-area-inset-bottom) max(12px, env(safe-area-inset-left));
+  }
+  .bid-details { grid-column: 1; grid-row: 1; padding: 11px 8px 8px; border: 0; min-width: 0; }
+  .bid-details > .eyebrow, .bid-clock > span { display: block; font-size: 9px; letter-spacing: .8px; margin: 0 0 3px; }
+  .bid-amount { display: inline; font-size: 28px; line-height: 1.1; letter-spacing: -.8px; }
+  .bid-amount > span { font-size: 15px; margin-left: 4px; }
+  .bid-owner { margin: 4px 0 0; font-size: 11px; line-height: 1.3; min-height: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+  .bid-clock { grid-column: 2; grid-row: 1; padding: 11px 8px 8px; background: transparent; border: 0; border-left: 1px solid #343b49; border-radius: 0; }
+  .bid-clock > span { display: flex; gap: 4px; }
+  .bid-clock > span svg { width: 11px; height: 11px; }
+  .bid-clock > strong { margin: 2px 0 4px; font-size: 28px; line-height: 1.1; }
+  .bid-clock > strong > small { font-size: 14px; }
+  .bid-actions { display: grid; grid-template-columns: 1fr auto; align-items: center; grid-column: 1/-1; gap: 8px; padding: 8px 0 10px; border-top: 1px solid #343b49; background: transparent; }
+  .quick-bids { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 7px; }
+  .quick-bids button { min-height: 46px; padding: 9px 3px; font-size: 21px; background: #ff654f; color: #17151c; border-color: #ff654f; }
+  .quick-bids button:disabled { background: #333442; border-color: #41434e; color: #a5abba; opacity: .7; }
+  .quick-bids button > small { font-size: 12px; }
+  .custom-bid-toggle { display: flex; align-items: center; justify-content: center; gap: 4px; min-height: 46px; max-width: 88px; font-size: 12px; line-height: 1.2; padding: 8px; border: 1px solid #454957; border-radius: 8px; }
+  .custom-bid { display: none; grid-column: 1/-1; gap: 8px; margin: 0; }
+  .custom-bid.is-open { display: flex; }
+  .custom-bid label { min-width: 0; flex: 1; }
+  .custom-bid input { width: 100%; height: 48px; font-size: 16px; }
+  .custom-bid > .primary { min-width: 90px; height: 48px; padding: 10px 12px; }
+  .mobile-bid-label { display: inline; }
+  .bid-help { grid-column: 1/-1; margin: 0; font-size: 11px; line-height: 1.4; color: #bac1ce; }
+  .bid-footnote { display: none; }
+  .offer-confirmation { grid-column: 1/-1; font-size: 12px; margin: 0; }
+  .pending-copy, .sale-result { grid-column: 1/-1; padding: 10px 2px; margin: 0; font-size: 13px; }
+  .sale-result { flex-direction: row; justify-content: flex-start; }
+  .sale-result > span { display: none; }
+  body:has(.market-layout) [data-sonner-toaster] { top: max(12px, env(safe-area-inset-top)) !important; bottom: auto !important; }
+
+  .lobby-main h1 { font-size: 44px; letter-spacing: -2px; }
+  .lobby-main .section-description { font-size: 15px; }
+  .invite-card { padding: 16px; flex-wrap: wrap; }
+  .invite-card .secondary { font-size: 13px; flex: 1; min-width: 155px; }
+  .invite-card strong { font-size: 26px; }
+  .lobby-player { padding: 13px 10px; gap: 9px; }
+  .lobby-player strong { font-size: 14px; }
+  .lobby-player .ready-chip { font-size: 10px; padding: 6px; }
+  .lobby-player > .gold { display: none; }
+  .lobby-bottom { flex-direction: column; align-items: stretch; }
+  .lobby-bottom > span { text-align: center; font-size: 12px; }
+  .lobby-side { grid-template-columns: 1fr; gap: 18px; }
+  .tip-card { padding: 10px 0; }
+  .rule-row { font-size: 13px; }
+
+  .formation-heading { align-items: flex-start; gap: 12px; }
+  .formation-heading h1 { font-size: 32px; letter-spacing: -1.4px; }
+  .formation-heading .section-description { font-size: 14px; line-height: 1.6; }
+  .formation-clock { min-width: 65px; padding: 12px; gap: 5px; }
+  .formation-clock strong { font-size: 26px; }
+  .formation-clock > small { display: none; }
+  .formation-status { position: sticky; top: 8px; z-index: 5; background: #1d222e; border: 1px solid #3c414e; border-radius: 10px; padding: 10px 12px; font-size: 13px; }
+  .formation-status.is-selecting { border-color: #ad695b; background: #352a2c; }
+  .formation-status .text-button { font-size: 12px; padding: 6px; }
+  .formation-slots { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px 14px; margin: 20px 0; }
+  .formation-slot { max-width: none; }
+  .formation-slot .card-placement { min-height: 0; width: 100%; aspect-ratio: 2/3; }
+  .formation-slot .card-placement:disabled { opacity: 1; }
+  .formation-slot .card-placement .card-copy h3 { font-size: 21px; }
+  .formation-slot .card-placement .card-role { font-size: 11px; }
+  .formation-slot .card-placement .card-price { font-size: 12px; }
+  .formation-slot .card-placement .card-universe { display: block; font-size: 9px; }
+  .slot-label { flex-wrap: nowrap; gap: 6px; min-height: 30px; }
+  .slot-label > svg { width: 15px; height: 15px; }
+  .slot-label h2 { font-size: 12px; }
+  .slot-bonus { min-height: 38px; font-size: 12px; line-height: 1.6; }
+  .formation-slot .text-button { font-size: 12px; min-height: 44px; padding: 10px 0; }
+  .slot-selected .placement-state { display: block; position: absolute; top: 42px; right: 5px; pointer-events: none; z-index: 3; font-size: 10px; background: #ff654f; color: #15151b; border-radius: 4px; padding: 5px 7px; font-weight: 700; }
+  .formation-bottom { flex-direction: column; gap: 18px; align-items: stretch; }
+  .formation-bottom .primary { width: 100%; min-height: 50px; font-size: 14px; }
+  .formation-instruction strong { font-size: 14px; }
+  .formation-instruction small { font-size: 12px; }
+  .opponent-cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .opponent-mini { padding: 8px; border: 1px solid #303848; border-radius: 7px; }
+  .opponent-mini > span { font-size: 12px; }
+  .opponent-mini small { font-size: 10px; }
+
+  .battle-top { flex-wrap: wrap; align-items: flex-start; gap: 16px; }
+  .battle-top h1 { font-size: 32px; }
+  .playback-controls { width: 100%; display: flex; gap: 8px; }
+  .playback-controls .icon-button { min-width: 44px; height: 44px; border: 1px solid #414857; }
+  .playback-controls .speed-button { min-width: 48px; font-size: 14px; }
+  .playback-controls .secondary { margin-left: auto; min-height: 44px; padding: 10px 14px; font-size: 13px; }
+  .playback-controls .secondary > span { display: inline; }
+  .battle-matchbar { padding: 12px; gap: 8px; margin-top: 20px; }
+  .battle-matchbar > span { font-size: 12px; }
+  .battle-matchbar .avatar { display: none; }
+  .battle-matchbar > div { font-size: 26px; min-width: 62px; gap: 12px; }
+  .battle-arena { grid-template-columns: minmax(0, 1fr) 44px minmax(0, 1fr); padding-bottom: 58px; }
+  .combatant .card-combat { width: 100%; height: auto; aspect-ratio: 2/3; }
+  .combatant .card-copy h3 { font-size: clamp(19px, 5.2vw, 26px); }
+  .combatant .card-copy { left: 9px; right: 7px; bottom: 12px; }
+  .combatant .card-universe { font-size: 8px; letter-spacing: .4px; }
+  .combatant .card-role { font-size: 10px; }
+  .versus { position: static; padding-bottom: 60px; }
+  .vs-mark { font-size: 29px; letter-spacing: -2px; }
+  .combat-event { top: auto; bottom: 4px; left: 0; width: 100%; padding: 8px 12px; font-size: 12px; border: 1px solid #343d4d; border-radius: 8px; background: #1d2430; }
+  .impact-symbol { left: calc(50% - 12px); }
+  .health-label { gap: 5px; font-size: 11px; margin-top: 16px; }
+  .health-label > span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .health-label > strong { white-space: nowrap; font-size: 11px; }
+  .winner-ribbon { font-size: 10px; padding: 8px 10px; }
+  .duel-analysis { padding: 16px; margin-top: 10px; }
+  .analysis-grid { grid-template-columns: 1fr; gap: 16px; }
+  .analysis-grid p { font-size: 13px; }
+  .analysis-grid > div > strong { font-size: 14px; }
+  .duel-analysis > .subtle { font-size: 12px; }
+  .duel-timeline { justify-content: flex-start; flex-wrap: nowrap; overflow: auto; padding-bottom: 8px; }
+  .duel-timeline button { flex: 0 0 auto; font-size: 12px; }
+
+  .results-hero h1 { font-size: clamp(34px, 10vw, 48px); overflow-wrap: anywhere; }
+  .results-actions { flex-wrap: wrap; }
+  .results-actions .primary, .results-actions .secondary { font-size: 13px; }
+  .standings-panel { padding: 18px 14px; }
+  .standing-row { gap: 8px; }
+  .standing-row > .avatar { display: none; }
+  .standing-row > strong { font-size: 14px; }
+  .standings-panel > .subtle { font-size: 12px; }
+  .awards-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .award { padding: 16px; }
+  .award > strong { font-size: 21px; }
+  .award > p, .award > small { font-size: 12px; }
+  .match-recap { padding: 14px 12px; gap: 8px; }
+
+  .catalog-header { display: block; }
+  .catalog-header > p { max-width: none; text-align: left; padding: 0; margin-top: 18px; font-size: 14px; }
+  .catalog-header > p br { display: none; }
+  .catalog-filters { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 10px; }
+  .catalog-filters > .search-input { grid-column: 1/-1; height: 48px; }
+  .catalog-filters .choice-trigger { font-size: 14px !important; }
+  .catalog-count { gap: 12px; font-size: 12px; }
+  .catalog-count > span { max-width: 170px; font-size: 11px; }
+  .catalog-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 12px; }
+  .catalog-grid .card-copy h3 { font-size: clamp(20px, 5.4vw, 28px); }
+  .catalog-grid .card-universe { font-size: 9px; }
+  .catalog-grid .card-role { font-size: 11px; }
+}
+
+/* Compact phones and software keyboards need space for both the form and CTA. */
+@media (max-width: 370px) {
+  .topbar { padding-inline: 12px; gap: 0 4px; }
+  .header-tools .icon-button { width: 42px; }
+  .brand { font-size: 15px; }
+  .brand-sub { font-size: 7px; letter-spacing: 3.5px; }
+  .hero-actions .primary, .hero-actions .secondary { font-size: 12px; }
+  .card-detail { grid-template-columns: 1fr; }
+  .card-detail > .character-card { width: 145px; margin: 0 auto; }
+  .fields-grid { grid-template-columns: 1fr; }
+  .auction-character { gap: 12px; }
+  .auction-intel > h2 { font-size: 12px; }
+  .auction-intel .stat-block { gap: 6px; }
+  .auction-intel .stat-row { font-size: 10px; }
+  .auction-intel .word-stat, .auction-intel .unknown { font-size: 10px; }
+  .formation-heading h1 { font-size: 27px; }
+  .formation-slot .card-placement .card-copy h3 { font-size: 19px; }
+}
+
+@media (max-width: 760px) and (max-height: 500px) {
+  .bidding-panel { max-height: 78dvh; }
+  .bidding-panel:focus-within .bid-help { display: none; }
+  [data-slot="dialog-content"] { max-height: calc(100dvh - 16px) !important; padding-block: 16px !important; }
+}
+
+@media (hover: none) {
+  button.character-card:hover, .primary:hover:not(:disabled) { transform: none; }
+  button.character-card:hover img { transform: none; }
+  .rank-SS:after { animation: none; }
+}
+
+@media (min-width: 761px) and (max-width: 1000px) and (max-height: 500px) {
+  .topbar { height: 66px; padding-inline: max(20px, env(safe-area-inset-left)); }
+  .game-progress { margin-bottom: 16px; padding-block: 14px; }
+  .market-layout { grid-template-columns: minmax(0, 1fr) 280px; align-items: start; }
+  .auction-character { grid-template-columns: 140px minmax(0, 1fr); gap: 16px; }
+  .auction-card-wrap .card-auction { height: 218px; min-height: 0; }
+  .auction-intel .stat-block { gap: 6px; }
+  .auction-intel .passive { display: none; }
+  .bidding-panel { position: sticky; top: 8px; }
+  .bid-clock, .bid-details { padding: 12px 18px; }
+  .bid-clock > strong, .bid-amount { font-size: 32px; }
+  .bid-actions { padding: 0 16px 12px; }
+  .quick-bids button, .custom-bid input, .custom-bid > .primary { min-height: 44px; }
+  .custom-bid input { font-size: 16px; }
+  .bid-footnote { display: none; }
+}
