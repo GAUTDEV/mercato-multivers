@@ -21,7 +21,11 @@ pnpm exec tsc --noEmit
 
 ## Cloudflare
 
-Voir [le guide de déploiement](docs/CLOUDFLARE.md). Le jeu nécessite Cloudflare Workers et une base D1. Le workflow GitHub Actions applique les migrations et déploie sur main après configuration des trois secrets Cloudflare. Aucun mot de passe ni jeton ne doit être ajouté aux sources.
+Le jeu utilise Cloudflare Workers et une base D1. La publication principale passe directement par Cloudflare Workers Builds : le dépôt `GAUTDEV/mercato-multivers`, branche `main`, est relié au Worker. Chaque nouvel envoi sur cette branche déclenche la compilation puis le déploiement.
+
+Dans Cloudflare, les commandes sont `pnpm run build:cloudflare` puis `pnpm run deploy:cloudflare`, depuis la racine du dépôt. La variable de build `CLOUDFLARE_D1_DATABASE_ID` doit désigner la base D1 existante. Si Cloudflare signale que le compte Git est déconnecté, rétablir l'accès au dépôt dans Settings → Builds → Manage avant de relancer une publication.
+
+Le workflow GitHub Actions décrit dans [le guide de déploiement](docs/CLOUDFLARE.md) est une autre méthode, qui nécessite trois secrets GitHub. Ces secrets ne sont pas nécessaires à l'intégration directe Cloudflare. Aucun mot de passe ni jeton ne doit être ajouté aux sources.
 
 ```sh
 pnpm run build:cloudflare
